@@ -169,6 +169,10 @@ resource "aws_lb_target_group_attachment" "this" {
   availability_zone = lookup(each.value, "availability_zone", null)
 
   depends_on = [aws_lambda_permission.lb]
+    
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_lb_listener_rule" "https_listener_rule" {
